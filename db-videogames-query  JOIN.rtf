@@ -1,0 +1,220 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1040{\fonttbl{\f0\fnil Courier New;}{\f1\fnil\fcharset0 Courier New;}{\f2\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red128\green0\blue0;\red0\green0\blue0;\red0\green0\blue128;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\cf1\b\f0\fs20\lang16 select\cf0\b0\par
+\cf2\tab\cf1\b distinct\cf2\b0  p.name,\cf0\par
+\cf2\tab p.lastname,\cf0\par
+\cf2\tab p.nickname\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab players p\cf0\par
+\cf1\b join\cf2\b0  reviews r \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab p.id = r.player_id\par
+\f1\lang1040 -------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab\cf1\b distinct\cf2\b0  v.id,\cf0\par
+\cf2\tab v.name\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab tournaments t\cf0\par
+\cf1\b join\cf2\b0  tournament_videogame tv \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab t.id = tv.tournament_id\cf0\par
+\cf1\b join\cf2\b0  videogames v \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab tv.videogame_id = v.id\cf0\par
+\cf1\b where\cf0\b0\par
+\cf2\tab t.\cf3\b year\cf2\b0  = \cf4 2016\par
+\f1 ------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab v.id,\cf0\par
+\cf2\tab v.name,\cf0\par
+\cf2\tab c.name\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab categories c\cf0\par
+\cf1\b join\cf2\b0  category_videogame cv \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab c.id = cv.category_id\cf0\par
+\cf1\b join\cf2\b0  videogames v \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab cv.videogame_id = v.id\par
+\f1 -----------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab sh.name,\cf0\par
+\cf2\tab sh.tax_id,\cf0\par
+\cf2\tab sh.city,\cf0\par
+\cf2\tab sh.country\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab software_houses sh\cf0\par
+\cf1\b join\cf2\b0  videogames v \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab sh.id = v.software_house_id\cf0\par
+\cf1\b where\cf0\b0\par
+\cf2\tab\cf3\b year\cf2\b0  (v.release_date) > \cf4 2020\cf0\par
+\cf1\b group\cf2\b0  \cf1\b by\cf0\b0\par
+\cf2\tab sh.id\par
+\f1 -------------------------------------\par
+\par
+\par
+\par
+-------------------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab\cf1\b distinct\cf2\b0  v.name,\cf0\par
+\cf2\tab c.name,\cf0\par
+\cf2\tab pl.name\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab videogames v\cf0\par
+\cf1\b join\cf2\b0  reviews r \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab v.id = r.videogame_id\cf0\par
+\cf1\b join\cf2\b0  category_videogame cv \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab v.id = cv.videogame_id\cf0\par
+\cf1\b join\cf2\b0  categories c \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab cv.category_id = c.id\cf0\par
+\cf1\b join\cf2\b0  pegi_label_videogame plv \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab v.id = plv.videogame_id\cf0\par
+\cf1\b join\cf2\b0  pegi_labels pl \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab plv.pegi_label_id = pl.id\cf0\par
+\cf1\b where\cf0\b0\par
+\cf2\tab r.rating = \cf4 4\cf0\par
+\cf2\tab\cf1\b or\cf2\b0  r.rating = \cf4 5\par
+\f1 ------------------------------------\par
+\cf1\b\f0\lang16 select\cf0\b0\par
+\cf2\tab\cf1\b distinct\cf2\b0  v.id,\cf0\par
+\cf2\tab v.name\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab videogames v\cf0\par
+\cf1\b join\cf2\b0  tournament_videogame tv\cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab v.id = tv.videogame_id\cf0\par
+\cf1\b join\cf2\b0  tournaments t \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab tv.tournament_id = t.id\cf0\par
+\cf1\b join\cf2\b0  player_tournament pt \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab t.id = pt.tournament_id\cf0\par
+\cf1\b join\cf2\b0  players p \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab pt.player_id = p.id\cf0\par
+\cf1\b where\cf0\b0\par
+\cf2\tab p.name \cf1\b like\cf2\b0  \cf3 "s%"\par
+\f1\lang1040 ---------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab t.city\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab tournaments t\cf0\par
+\cf1\b join\cf2\b0  tournament_videogame tv \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab t.id = tv.tournament_id\cf0\par
+\cf1\b where\cf0\b0\par
+\cf2\tab tv.videogame_id = (\cf0\par
+\cf2\tab\cf1\b select\cf0\b0\par
+\cf2\tab\tab v.id\cf0\par
+\cf2\tab\cf1\b from\cf0\b0\par
+\cf2\tab\tab award_videogame av\cf0\par
+\cf2\tab\cf1\b join\cf2\b0  awards a \cf0\par
+\cf2\tab\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab\tab av.award_id = a.id\cf0\par
+\cf2\tab\cf1\b join\cf2\b0  videogames v \cf0\par
+\cf2\tab\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab\tab av.videogame_id = v.id\cf0\par
+\cf2\tab\cf1\b where\cf0\b0\par
+\cf2\tab\tab a.name \cf1\b like\cf2\b0  \cf3 "%gioco dell'anno%"\cf0\par
+\cf2\tab\tab\cf1\b and\cf2\b0  av.\cf3\b year\cf2\b0  = \cf4 2018\f1 )\f0\par
+\f1 ---------------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab p.name,\cf0\par
+\cf2\tab p.lastname,\cf0\par
+\cf2\tab p.nickname\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab players p\cf0\par
+\cf1\b join\cf2\b0  player_tournament pt \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab p.id = pt.player_id\cf0\par
+\cf1\b join\cf2\b0  tournaments t \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab pt.tournament_id = t.id\cf0\par
+\cf1\b join\cf2\b0  tournament_videogame tv \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab t.id = tv.tournament_id\cf0\par
+\cf1\b where\cf0\b0\par
+\cf2\tab t.\cf3\b year\cf2\b0  = \cf4 2019\cf0\par
+\cf2\tab\cf1\b and\cf2\b0  tv.videogame_id = (\cf0\par
+\cf2\tab\cf1\b select\cf0\b0\par
+\cf2\tab\tab v.id\cf0\par
+\cf2\tab\cf1\b from\cf0\b0\par
+\cf2\tab\tab award_videogame av\cf0\par
+\cf2\tab\cf1\b join\cf2\b0  awards a \cf0\par
+\cf2\tab\tab\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab\tab av.award_id = a.id\cf0\par
+\cf2\tab\cf1\b join\cf2\b0  videogames v \cf0\par
+\cf2\tab\tab\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab\tab av.videogame_id = v.id\cf0\par
+\cf2\tab\cf1\b where\cf0\b0\par
+\cf2\tab\tab a.name \cf1\b like\cf2\b0  \cf3 "%gioco%atteso%"\cf0\par
+\cf2\tab\tab\cf1\b and\cf2\b0  av.\cf3\b year\cf2\b0  = \cf4 2019\cf2  \cf0\par
+\cf2\tab )\par
+\f1 ------------------------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab sh.id,\cf0\par
+\cf2\tab sh.name,\cf0\par
+\cf2\tab sh.tax_id,\cf0\par
+\cf2\tab sh.city,\cf0\par
+\cf2\tab sh.country,\cf0\par
+\cf2\tab v.id,\cf0\par
+\cf2\tab v.name\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab videogames v\cf0\par
+\cf1\b join\cf2\b0  software_houses sh \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab v.software_house_id = sh.id\cf0\par
+\cf1\b order\cf2\b0  \cf1\b by\cf0\b0\par
+\cf2\tab v.release_date\cf0\par
+\cf1\b limit\cf2\b0  \cf4 1\par
+\f1 ---------------------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab v.id,\cf0\par
+\cf2\tab v.name,\cf0\par
+\cf2\tab v.release_date,\cf0\par
+\cf2\tab\cf3\b COUNT\cf2\b0 (*)\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab videogames v\cf0\par
+\cf1\b join\cf2\b0  reviews r \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab v.id = r.videogame_id\cf0\par
+\cf1\b group\cf2\b0  \cf1\b by\cf0\b0\par
+\cf2\tab r.videogame_id\cf0\par
+\cf1\b order\cf2\b0  \cf1\b by\cf0\b0\par
+\cf2\tab\cf3\b COUNT\cf2\b0 (*) \cf1\b desc\cf0\b0\par
+\cf1\b limit\cf2\b0  \cf4 1\par
+\f1 --------------------------------\par
+\cf1\b\f0 select\cf0\b0\par
+\cf2\tab sh.id,\cf0\par
+\cf2\tab sh.name,\cf0\par
+\cf2\tab sh.tax_id,\cf0\par
+\cf2\tab sh.city,\cf0\par
+\cf2\tab sh.country,\cf0\par
+\cf2\tab\cf3\b COUNT\cf2\b0 (*)\cf0\par
+\cf1\b from\cf0\b0\par
+\cf2\tab software_houses sh\cf0\par
+\cf1\b join\cf2\b0  videogames v \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab sh.id = v.software_house_id\cf0\par
+\cf1\b join\cf2\b0  award_videogame av \cf0\par
+\cf2\tab\tab\cf1\b on\cf0\b0\par
+\cf2\tab v.id = av.videogame_id\cf0\par
+\cf1\b where\cf0\b0\par
+\cf2\tab av.\cf3\b year\cf2\b0  > \cf4 2014\cf0\par
+\cf2\tab\cf1\b and\cf2\b0  av.\cf3\b year\cf2\b0  < \cf4 2017\cf0\par
+\cf1\b group\cf2\b0  \cf1\b by\cf0\b0\par
+\cf2\tab sh.id\cf0\par
+\cf1\b order\cf2\b0  \cf1\b by\cf0\b0\par
+\cf2\tab\cf3\b count\cf2\b0 (*) \cf1\b desc\cf0\b0\par
+\cf1\b limit\cf2\b0  \cf4 1\par
+\f1 --------------------------\par
+\cf0\f2\fs22\lang16\par
+}
+ 
