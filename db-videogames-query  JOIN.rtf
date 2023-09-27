@@ -230,6 +230,20 @@
 \cf2\tab\cf3\b count\cf2\b0 (*) \cf1\b desc\cf0\b0\par
 \cf1\b limit\cf2\b0  \cf4 1\par
 \f1 --------------------------\par
-\cf0\f2\fs22\lang16\par
+\cf1\b\f0\lang16 SELECT\cf0\b0\par
+\cf2     c.name \cf1\b AS\cf2\b0  \cf5 'Nome Categoria'\cf2 ,\cf0\par
+\cf2     \cf3\b AVG\cf2\b0 (r.rating) \cf1\b AS\cf2\b0  \cf5 'Media Recensioni'\cf0\par
+\cf1\b FROM\cf0\b0\par
+\cf2     Category_Videogame cv\cf0\par
+\cf1\b JOIN\cf0\b0\par
+\cf2     Videogames v \cf1\b ON\cf2\b0  cv.videogame_id = v.id\cf0\par
+\cf1\b JOIN\cf0\b0\par
+\cf2     reviews  r \cf1\b ON\cf2\b0  v.id = r.videogame_id\cf0\par
+\cf1\b JOIN\cf0\b0\par
+\cf2     Categories c \cf1\b ON\cf2\b0  cv.category_id = c.id\cf0\par
+\cf1\b GROUP\cf2\b0  \cf1\b BY\cf0\b0\par
+\cf2     c.name\cf0\par
+\cf1\b HAVING\cf0\b0\par
+\cf2     \cf3\b AVG\cf2\b0 (r.rating) < \cf4 2\cf6 ;\cf0\f2\fs22\par
 }
  
