@@ -1,5 +1,5 @@
 {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1040{\fonttbl{\f0\fnil Courier New;}{\f1\fnil\fcharset0 Courier New;}{\f2\fnil\fcharset0 Calibri;}}
-{\colortbl ;\red128\green0\blue0;\red0\green0\blue0;\red0\green0\blue128;\red0\green0\blue255;}
+{\colortbl ;\red128\green0\blue0;\red0\green0\blue0;\red0\green0\blue128;\red0\green0\blue255;\red0\green128\blue0;\red255\green0\blue0;}
 {\*\generator Riched20 10.0.22621}\viewkind4\uc1 
 \pard\sa200\sl276\slmult1\cf1\b\f0\fs20\lang16 select\cf0\b0\par
 \cf2\tab\cf1\b distinct\cf2\b0  p.name,\cf0\par
@@ -54,7 +54,22 @@
 \cf2\tab sh.id\par
 \f1 -------------------------------------\par
 \par
-\par
+\cf1\b\f0 SELECT\cf0\b0\par
+\cf2     sh.name \cf1\b AS\cf2\b0  \cf5 'Nome Software House'\cf2 ,\cf0\par
+\cf2     vg.name \cf1\b AS\cf2\b0  \cf5 'Nome Videogioco'\cf2 ,\cf0\par
+\cf2     a.name \cf1\b AS\cf2\b0  \cf5 'Nome Premio'\cf2 ,\cf0\par
+\cf2     a.description \cf1\b AS\cf2\b0  \cf5 'Descrizione Premio'\cf2 ,\cf0\par
+\cf2     \cf3\b YEAR\cf2\b0 (a.created_at) \cf1\b AS\cf2\b0  \cf5 'Anno Premio'\cf0\par
+\cf1\b FROM\cf0\b0\par
+\cf2     software_houses sh\cf0\par
+\cf1\b JOIN\cf0\b0\par
+\cf2     videogames vg \cf1\b ON\cf2\b0  sh.id = vg.software_house_id\cf0\par
+\cf1\b JOIN\cf0\b0\par
+\cf2     award_videogame av \cf1\b ON\cf2\b0  vg.id = av.videogame_id\cf0\par
+\cf1\b JOIN\cf0\b0\par
+\cf2     awards a \cf1\b ON\cf2\b0  av.award_id = a.id\cf0\par
+\cf1\b ORDER\cf2\b0  \cf1\b BY\cf0\b0\par
+\cf2     sh.name\cf6 ;\cf2\f1\par
 \par
 -------------------------------------------\par
 \cf1\b\f0 select\cf0\b0\par
