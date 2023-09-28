@@ -41,4 +41,274 @@ select count(id)
 from videogames v  
 where year (release_date) = 2018
 and software_house_id = 1
+----------------------------------------------------------------------------------------
+select
+	distinct p.name,
+	p.lastname,
+	p.nickname
+from
+	players p
+join reviews r 
+		on
+	p.id = r.player_id
+-------------------------------
+select
+	distinct v.id,
+	v.name
+from
+	tournaments t
+join tournament_videogame tv 
+		on
+	t.id = tv.tournament_id
+join videogames v 
+		on
+	tv.videogame_id = v.id
+where
+	t.year = 2016
+------------------------------
+select
+	v.id,
+	v.name,
+	c.name
+from
+	categories c
+join category_videogame cv 
+		on
+	c.id = cv.category_id
+join videogames v 
+		on
+	cv.videogame_id = v.id
+-----------------------------------
+select
+	sh.name,
+	sh.tax_id,
+	sh.city,
+	sh.country
+from
+	software_houses sh
+join videogames v 
+		on
+	sh.id = v.software_house_id
+where
+	year (v.release_date) > 2020
+group by
+	sh.id
+-------------------------------------
+
+SELECT
+    sh.name AS 'Nome Software House',
+    vg.name AS 'Nome Videogioco',
+    a.name AS 'Nome Premio',
+    a.description AS 'Descrizione Premio',
+    YEAR(a.created_at) AS 'Anno Premio'
+FROM
+    software_houses sh
+JOIN
+    videogames vg ON sh.id = vg.software_house_id
+JOIN
+    award_videogame av ON vg.id = av.videogame_id
+JOIN
+    awards a ON av.award_id = a.id
+ORDER BY
+    sh.name;
+
+-------------------------------------------
+select
+	distinct v.name,
+	c.name,
+	pl.name
+from
+	videogames v
+join reviews r 
+		on
+	v.id = r.videogame_id
+join category_videogame cv 
+		on
+	v.id = cv.videogame_id
+join categories c 
+		on
+	cv.category_id = c.id
+join pegi_label_videogame plv 
+		on
+	v.id = plv.videogame_id
+join pegi_labels pl 
+		on
+	plv.pegi_label_id = pl.id
+where
+	r.rating = 4
+	or r.rating = 5
+------------------------------------
+select
+	distinct v.id,
+	v.name
+from
+	videogames v
+join tournament_videogame tv
+		on
+	v.id = tv.videogame_id
+join tournaments t 
+		on
+	tv.tournament_id = t.id
+join player_tournament pt 
+		on
+	t.id = pt.tournament_id
+join players p 
+		on
+	pt.player_id = p.id
+where
+	p.name like "s%"
+---------------------------------
+select
+	t.city
+from
+	tournaments t
+join tournament_videogame tv 
+		on
+	t.id = tv.tournament_id
+where
+	tv.videogame_id = (
+	select
+		v.id
+	from
+		award_videogame av
+	join awards a 
+			on
+		av.award_id = a.id
+	join videogames v 
+			on
+		av.videogame_id = v.id
+	where
+		a.name like "%gioco dell'anno%"
+		and av.year = 2018)
+---------------------------------------
+select
+	p.name,
+	p.lastname,
+	p.nickname
+from
+	players p
+join player_tournament pt 
+		on
+	p.id = pt.player_id
+join tournaments t 
+		on
+	pt.tournament_id = t.id
+join tournament_videogame tv 
+		on
+	t.id = tv.tournament_id
+where
+	t.year = 2019
+	and tv.videogame_id = (
+	select
+		v.id
+	from
+		award_videogame av
+	join awards a 
+				on
+		av.award_id = a.id
+	join videogames v 
+				on
+		av.videogame_id = v.id
+	where
+		a.name like "%gioco%atteso%"
+		and av.year = 2019 
+	)
+------------------------------------------------
+select
+	sh.id,
+	sh.name,
+	sh.tax_id,
+	sh.city,
+	sh.country,
+	v.id,
+	v.name
+from
+	videogames v
+join software_houses sh 
+		on
+	v.software_house_id = sh.id
+order by
+	v.release_date
+limit 1
+---------------------------------------------
+select
+	v.id,
+	v.name,
+	v.release_date,
+	COUNT(*)
+from
+	videogames v
+join reviews r 
+		on
+	v.id = r.videogame_id
+group by
+	r.videogame_id
+order by
+	COUNT(*) desc
+limit 1
+--------------------------------
+select
+	sh.id,
+	sh.name,
+	sh.tax_id,
+	sh.city,
+	sh.country,
+	COUNT(*)
+from
+	software_houses sh
+join videogames v 
+		on
+	sh.id = v.software_house_id
+join award_videogame av 
+		on
+	v.id = av.videogame_id
+where
+	av.year > 2014
+	and av.year < 2017
+group by
+	sh.id
+order by
+	count(*) desc
+limit 1
+--------------------------
+SELECT
+    c.name AS 'Nome Categoria',
+    AVG(r.rating) AS 'Media Recensioni'
+FROM
+    Category_Videogame cv
+JOIN
+    Videogames v ON cv.videogame_id = v.id
+JOIN
+    reviews  r ON v.id = r.videogame_id
+JOIN
+    Categories c ON cv.category_id = c.id
+GROUP BY
+    c.name
+HAVING
+    AVG(r.rating) < 2;
+------------------------------------------------------------------------------------------------
+SELECT country ,count(*)
+FROM software_houses sh 
+GROUP BY country 
+----------------------------
+SELECT  videogame_id  ,count(*)
+FROM reviews r  
+GROUP BY videogame_id  
+-------------------------------
+SELECT pegi_label_id, COUNT(*) 
+FROM pegi_label_videogame plv 
+GROUP BY pegi_label_id
+----------------------------------------
+SELECT YEAR (v.release_date), COUNT(*) 
+FROM videogames v 
+GROUP BY YEAR (v.release_date)
+------------------------------
+SELECT dv.device_id, COUNT(*) 
+FROM device_videogame dv 
+GROUP BY dv.device_id
+---------------------------------------
+SELECT r.videogame_id, avg(r.rating) 
+FROM reviews r 
+GROUP BY r.videogame_id
+ORDER BY avg(r.rating) DESC
 
