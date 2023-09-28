@@ -1,0 +1,44 @@
+select *
+from software_houses sh 
+where country like 'United States'
+---------------------------------------------
+select *
+from players p 
+where city  like 'Rogahnland'
+----------------------------------------------
+select *
+from players p 
+where name like '%a'
+---------------------------------------------------
+select *
+from reviews r 
+where player_id like 800
+---------------------------------------------------
+ select count(*) from tournaments t where year like 2015;
+------------------------------------------------------------
+select *
+from awards a 
+where description like '%facere%'
+-------------------------------------------------------------
+SELECT DISTINCT videogame_id 
+FROM category_videogame cv 
+WHERE category_id  IN (2, 6);
+---------------------------------------------------------------------SELECT *
+from reviews r 
+where rating >= 2 and rating <= 4 
+---------------------------------
+SELECT *
+from videogames v 
+where year (release_date) = 2020
+-----------------------------------------
+select distinct videogame_id 
+from reviews r where rating >= 5
+-----------------------------------------
+select count(*),avg(rating) 
+from reviews r where videogame_id =412
+-----------------------------------------
+select count(id) 
+from videogames v  
+where year (release_date) = 2018
+and software_house_id = 1
+
