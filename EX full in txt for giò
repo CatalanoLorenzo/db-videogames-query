@@ -1,47 +1,81 @@
+QUERY
+ES1
 select *
 from software_houses sh 
 where country like 'United States'
----------------------------------------------
+ES2
 select *
 from players p 
 where city  like 'Rogahnland'
-----------------------------------------------
+ES3
 select *
 from players p 
 where name like '%a'
----------------------------------------------------
+ES4
 select *
 from reviews r 
 where player_id like 800
----------------------------------------------------
+ES5
  select count(*) from tournaments t where year like 2015;
 ------------------------------------------------------------
 select *
 from awards a 
 where description like '%facere%'
--------------------------------------------------------------
+ES6
 SELECT DISTINCT videogame_id 
 FROM category_videogame cv 
 WHERE category_id  IN (2, 6);
----------------------------------------------------------------------SELECT *
+ES7
+SELECT *
 from reviews r 
 where rating >= 2 and rating <= 4 
----------------------------------
+ES8
 SELECT *
 from videogames v 
 where year (release_date) = 2020
------------------------------------------
+ES9
 select distinct videogame_id 
 from reviews r where rating >= 5
------------------------------------------
+ES10
 select count(*),avg(rating) 
 from reviews r where videogame_id =412
------------------------------------------
+ES11
 select count(id) 
 from videogames v  
 where year (release_date) = 2018
 and software_house_id = 1
-----------------------------------------------------------------------------------------
+
+
+--------------------------------------------
+GROUP BY
+ES1
+SELECT country ,count(*)
+FROM software_houses sh 
+GROUP BY country 
+ES2
+SELECT  videogame_id  ,count(*)
+FROM reviews r  
+GROUP BY videogame_id  
+ES3
+SELECT pegi_label_id, COUNT(*) 
+FROM pegi_label_videogame plv 
+GROUP BY pegi_label_id
+ES4
+SELECT YEAR (v.release_date), COUNT(*) 
+FROM videogames v 
+GROUP BY YEAR (v.release_date)
+ES5
+SELECT dv.device_id, COUNT(*) 
+FROM device_videogame dv 
+GROUP BY dv.device_id
+ES6
+SELECT r.videogame_id, avg(r.rating) 
+FROM reviews r 
+GROUP BY r.videogame_id
+ORDER BY avg(r.rating) DESC
+------------------------------------------------------------------------------------------------
+JOIN
+ES1
 select
 	distinct p.name,
 	p.lastname,
@@ -51,7 +85,7 @@ from
 join reviews r 
 		on
 	p.id = r.player_id
--------------------------------
+ES2
 select
 	distinct v.id,
 	v.name
@@ -65,7 +99,7 @@ join videogames v
 	tv.videogame_id = v.id
 where
 	t.year = 2016
-------------------------------
+ES3
 select
 	v.id,
 	v.name,
@@ -78,7 +112,7 @@ join category_videogame cv
 join videogames v 
 		on
 	cv.videogame_id = v.id
------------------------------------
+ES4
 select
 	sh.name,
 	sh.tax_id,
@@ -94,7 +128,7 @@ where
 group by
 	sh.id
 -------------------------------------
-
+ES5
 SELECT
     sh.name AS 'Nome Software House',
     vg.name AS 'Nome Videogioco',
@@ -112,7 +146,7 @@ JOIN
 ORDER BY
     sh.name;
 
--------------------------------------------
+ES6
 select
 	distinct v.name,
 	c.name,
@@ -137,7 +171,7 @@ join pegi_labels pl
 where
 	r.rating = 4
 	or r.rating = 5
-------------------------------------
+ES7
 select
 	distinct v.id,
 	v.name
@@ -157,7 +191,7 @@ join players p
 	pt.player_id = p.id
 where
 	p.name like "s%"
----------------------------------
+ES8
 select
 	t.city
 from
@@ -180,7 +214,7 @@ where
 	where
 		a.name like "%gioco dell'anno%"
 		and av.year = 2018)
----------------------------------------
+ES9
 select
 	p.name,
 	p.lastname,
@@ -213,7 +247,7 @@ where
 		a.name like "%gioco%atteso%"
 		and av.year = 2019 
 	)
-------------------------------------------------
+ES10
 select
 	sh.id,
 	sh.name,
@@ -230,7 +264,7 @@ join software_houses sh
 order by
 	v.release_date
 limit 1
----------------------------------------------
+ES11
 select
 	v.id,
 	v.name,
@@ -246,7 +280,7 @@ group by
 order by
 	COUNT(*) desc
 limit 1
---------------------------------
+ES12
 select
 	sh.id,
 	sh.name,
@@ -270,7 +304,7 @@ group by
 order by
 	count(*) desc
 limit 1
---------------------------
+ES13
 SELECT
     c.name AS 'Nome Categoria',
     AVG(r.rating) AS 'Media Recensioni'
@@ -286,29 +320,4 @@ GROUP BY
     c.name
 HAVING
     AVG(r.rating) < 2;
-------------------------------------------------------------------------------------------------
-SELECT country ,count(*)
-FROM software_houses sh 
-GROUP BY country 
-----------------------------
-SELECT  videogame_id  ,count(*)
-FROM reviews r  
-GROUP BY videogame_id  
--------------------------------
-SELECT pegi_label_id, COUNT(*) 
-FROM pegi_label_videogame plv 
-GROUP BY pegi_label_id
-----------------------------------------
-SELECT YEAR (v.release_date), COUNT(*) 
-FROM videogames v 
-GROUP BY YEAR (v.release_date)
-------------------------------
-SELECT dv.device_id, COUNT(*) 
-FROM device_videogame dv 
-GROUP BY dv.device_id
----------------------------------------
-SELECT r.videogame_id, avg(r.rating) 
-FROM reviews r 
-GROUP BY r.videogame_id
-ORDER BY avg(r.rating) DESC
 
